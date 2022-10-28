@@ -97,6 +97,6 @@ for(let i = 0; i < palavra.length; i++){
   palavraInvertida += palavra[palavra.length - 1 - i]
 }
 
-palavra.toLowerCase()===palavraInvertida.toLowerCase() ?  console.log('palindromos') : console.log(`Nao sao: palavra - ${palavra} // palavra invertida: ${palavraInvertida}`)
+palavra.toLowerCase()===palavraInvertida.toLowerCase() ?  console.log('palindromos') : console.log(`Nao sao palindromos: palavra - ${palavra} // palavra invertida: ${palavraInvertida}`)
 
 
