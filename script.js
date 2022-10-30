@@ -29,34 +29,74 @@
 // );
 
 //Atacante
-const atacante = prompt("Qual o nome do atacante? ");
-let poderDeAtaque = parseFloat(prompt("Qual o valor do poder de ataque dele? "));
+// const atacante = prompt("Qual o nome do atacante? ");
+// let poderDeAtaque = parseFloat(prompt("Qual o valor do poder de ataque dele? "));
 
-//Defensor
-const defensor = prompt("Qual o nome do defensor? ");
-let vidaDefensor = parseFloat(prompt("Qual a quantidade de vida do dele? "));
-let poderDeDefesa = parseFloat(prompt("Qual o valor do poder de defesa do defensor? "));
-let escudo = confirm("O defensor possui um escudo? OK = SIM e Cancelar = NÃO");
+// //Defensor
+// const defensor = prompt("Qual o nome do defensor? ");
+// let vidaDefensor = parseFloat(prompt("Qual a quantidade de vida do dele? "));
+// let poderDeDefesa = parseFloat(prompt("Qual o valor do poder de defesa do defensor? "));
+// let escudo = confirm("O defensor possui um escudo? OK = SIM e Cancelar = NÃO");
 
+// if (poderDeAtaque > poderDeDefesa) {
+//   var danoCausado = escudo ? (poderDeAtaque - poderDeDefesa) / 2 :(poderDeAtaque - poderDeDefesa);
+// }
 
+// let vidaDefensorAtual = vidaDefensor - danoCausado;
+// alert(
+//   `O atacante ${atacante} possui ${poderDeAtaque} de dano e o defensor ${defensor} possui ${vidaDefensor} de vida e ${poderDeDefesa} de defesa.`
+// );
 
-if (poderDeAtaque > poderDeDefesa) {
-  var danoCausado = escudo ? (poderDeAtaque - poderDeDefesa) / 2 :(poderDeAtaque - poderDeDefesa);
-}
+// alert("O golpe foi dado!");
+// alert(`O dano causado pelo atacante foi de ${danoCausado}`);
+// alert(`Vida atual do defensor: ${vidaDefensorAtual}`);
 
+// var resultadoDaLuta =
+//   vidaDefensorAtual <= 0
+//     ? alert(`${atacante} MATA ${defensor} e VENCE a luta!`)
+//     : alert(
+//         `${defensor} RESISTE ao ataque de ${atacante} e SOBREVIVE na luta!`
+//       );
 
-let vidaDefensorAtual = vidaDefensor - danoCausado;
-alert(
-  `O atacante ${atacante} possui ${poderDeAtaque} de dano e o defensor ${defensor} possui ${vidaDefensor} de vida e ${poderDeDefesa} de defesa.`
-);
+let pacientes = ["João", "Pedro", "Carlos", "Paulo"];
+let option = 0;
+let novoPaciente = "";
 
-alert("O golpe foi dado!");
-alert(`O dano causado pelo atacante foi de ${danoCausado}`);
-alert(`Vida atual do defensor: ${vidaDefensorAtual}`);
+do {
+  let lista = "";
+  for (let i = 0; i < pacientes.length; i++) {
+    lista += ` ${i + 1}° - ${pacientes[i]} \n`;
+  }
+  option = parseFloat(
+    prompt(`Lista de pacientes:\n${lista}
+    O que deseja fazer?
+    1 - Novo paciente
+    2 - Consultar paciente
+    3 - SAIR`)
+  );
 
-var resultadoDaLuta =
-  vidaDefensorAtual <= 0
-    ? alert(`${atacante} MATA ${defensor} e VENCE a luta!`)
-    : alert(
-        `${defensor} RESISTE ao ataque de ${atacante} e SOBREVIVE na luta!`
+  switch (option) {
+    case 1:
+      novoPaciente = prompt("Qual nome do paciente a ser adicionado?");
+      let preferencia = confirm(
+        "O paciente possui preferência na fila? OK = SIM, CANCELAR = NÃO"
       );
+      preferencia
+        ? pacientes.unshift(novoPaciente)
+        : pacientes.push(novoPaciente);
+      break;
+    case 2:
+      const pacienteConsultado = pacientes.shift();
+      pacienteConsultado
+        ? alert(`Paciente consultado: ${pacienteConsultado}`)
+        : alert("Fila vazia!");
+      break;
+    case 3:
+      alert("Programa encerrando...");
+      break;
+    default:
+      alert("Opção inválida!");
+  }
+} while (option != 3);
+
+alert("Programa encerrado");
