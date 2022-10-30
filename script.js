@@ -100,3 +100,5 @@ do {
 } while (option != 3);
 
 alert("Programa encerrado");
+
+alert("Array exercicio");
