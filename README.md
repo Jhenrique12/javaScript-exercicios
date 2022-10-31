@@ -1,2 +1,2 @@
-# Estudo de JavaScript - começo 24.10.2022 - SEG
-Repositorio pra teste js
+# Estudo de JavaScript - lógica de programação
+Repositorio de resolução de exercícios envolvendo lógica de programação com foco em JavaScript
