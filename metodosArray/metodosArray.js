@@ -23,3 +23,15 @@ const nomes = personagens.map(function (personagem) {
 })
 
 
+// const orcs = []
+// for (let i = 0; i < personagens.length; i++) {
+//   const personagem = personagens[i]
+//   if (personagem.raca === "Orc") {
+//     orcs.push(personagem)
+//   }
+// }
+
+// filter: permite obter um novo array contendo apenas elementos específicos de um array existente
+const orcs = personagens.filter(function (personagem) {
+  return personagem.raca === "Orc"
+})
