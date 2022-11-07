@@ -1,4 +1,4 @@
-// Utilize Map, Filter, Reduce e Sort para fazer o mesmo que foi feito com a estrutura de repetição. Comente o código já feito.
+// Utilize Map, Filter e Reduce para fazer o mesmo que foi feito com a estrutura de repetição. Comente o código já feito.
 
 const personagens = [
   { nivel: 42, nome: "Thrall", raca: "Orc", classe: "Xamã" },
@@ -58,3 +58,10 @@ const racas = personagens.reduce(function (acumulador, personagem) {
 }, {})
 
 console.log(racas)
+
+//Utilizando Sort, ordene o array personagens a partir do nível
+
+// sort: ordena os elementos de um array a partir de comparações entre duplas de elementos
+const arrayOrdenado = personagens.slice().sort(function (a, b) {
+  return a.nivel - b.nivel // se 'a' for menor que 'b' -> retornará negativo e o 'a' será jogado para uma posição inferior a 'b', e se der positivo, o 'a' será jogado para uma posição mais a frente que 'b'
+})
