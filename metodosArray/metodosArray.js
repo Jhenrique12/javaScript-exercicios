@@ -35,3 +35,4 @@ const nomes = personagens.map(function (personagem) {
 const orcs = personagens.filter(function (personagem) {
   return personagem.raca === "Orc"
 })
+
