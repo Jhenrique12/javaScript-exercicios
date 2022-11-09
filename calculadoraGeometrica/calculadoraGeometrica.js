@@ -1,8 +1,33 @@
 let option = 0;
 const medidas = {};
-do {
-  option = parseFloat(
-    prompt(`
+
+function calcularAreaTriangulo() {
+  const base = parseFloat(prompt("Informe a base do triângulo:"));
+  const altura = parseFloat(prompt("Informe a altura do triângulo:"));
+  return (base * altura) / 2;
+}
+function calcularAreaRetangulo() {
+  const base = parseFloat(prompt("Informe a base do retângulo:"));
+  const altura = parseFloat(prompt("Informe a altura do retângulo:"));
+  return base * altura;
+}
+function calcularAreaQuadrado() {
+  const lado = parseFloat(prompt("Informe a área do quadrado:"));
+  return lado * lado;
+}
+function calcularAreaTrapezio() {
+  const baseMenor = parseFloat(prompt("Informe a base menor do trapézio:"));
+  const baseMaior = parseFloat(prompt("Informe a base maior do trapézio:"));
+  const altura = parseFloat(prompt("Informe a altura do trapézio:"));
+  return ((baseMaior + baseMenor) * altura) / 2;
+}
+function calcularAreaCirculo() {
+  const raio = parseFloat(prompt("Informe o raio do círculo:"));
+  return 3.14 * raio * raio;
+}
+
+function exibirMenu() {
+  return prompt(`
   Calculadora Geométrica
   
   Escolha o que quer calcular:
@@ -11,66 +36,44 @@ do {
   3 - Área do quadrado
   4 - Área do trapézio
   5 - Área do círculo (pi = 3.14)
-  6 - SAIR`)
-  );
+  6 - SAIR`);
+}
 
-  switch (option) {
-    case 1:
-      function areaDoTriangulo(base, altura) {
-        return (base * altura) / 2;
-      }
-      medidas.base = parseFloat(prompt("Digite o valor da base"));
-      medidas.altura = parseFloat(prompt("Digite o valor da altura"));
+function executar() {
+  let opcao = "";
 
-      alert(
-        `A área do Triângulo é ${areaDoTriangulo(medidas.base, medidas.altura)}`
-      );
-      break;
-    case 2:
-      function areaDoRetangulo(base, altura) {
-        return base * altura;
-      }
-      medidas.base = parseFloat(prompt("Digite o valor da base"));
-      medidas.altura = parseFloat(prompt("Digite o valor da altura"));
+  do {
+    opcao = exibirMenu();
+    let resultado;
 
-      alert(
-        `A área do Retângulo é ${areaDoRetangulo(medidas.base, medidas.altura)}`
-      );
-      break;
-    case 3:
-      function areaDoQuadrado(lado) {
-        return lado * lado;
-      }
-      medidas.lado = parseFloat(prompt("Digite o valor do lado do quadrado"));
+    switch (opcao) {
+      case "1":
+        resultado = calcularAreaTriangulo();
+        break;
+      case "2":
+        resultado = calcularAreaRetangulo();
+        break;
+      case "3":
+        resultado = calcularAreaQuadrado();
+        break;
+      case "4":
+        resultado = calcularAreaTrapezio();
+        break;
+      case "5":
+        resultado = calcularAreaCirculo();
+        break;
+      case "6":
+        alert("Saindo...");
+        break;
+      default:
+        alert("Opção inválida!");
+        break;
+    }
 
-      alert(`A área do Quadrado é ${areaDoQuadrado(medidas.lado)}`);
-      break;
-    case 4:
-      function areaDoTrapezio(baseMaior, baseMenor, altura) {
-        return ((baseMaior + baseMenor) * altura) / 2;
-      }
-      medidas.baseMaior = parseFloat(prompt("Digite o valor da base maior"));
-      medidas.baseMenor = parseFloat(prompt("Digite o valor da base menor"));
-      medidas.altura = parseFloat(prompt("Digite o valor da altura"));
+    if (resultado) {
+      alert("Resultado: " + resultado);
+    }
+  } while (opcao !== "6");
+}
 
-      alert(
-        `A área do Trapézio é ${areaDoTrapezio(
-          medidas.baseMaior,
-          medidas.baseMenor,
-          medidas.altura
-        )}`
-      );
-      break;
-    case 5:
-      function areaDoCirculo(raio) {
-        return raio * raio * 3.14;
-      }
-      medidas.raio = parseFloat(prompt("Digite o valor do raio do círculo"));
-
-      alert(`A área do Círculo é ${areaDoCirculo(medidas.raio)}`);
-      break;
-    case 6:
-      alert("Programa encerrando...");
-      break;
-  }
-} while (option != 6);
+executar();
