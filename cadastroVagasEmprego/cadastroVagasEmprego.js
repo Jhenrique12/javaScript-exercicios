@@ -10,41 +10,83 @@
 
 // function listarVagas () { //nome, indice, qtd cadidatos
 //   listaVagas.forEach(function(vaga, indiceVaga,){
-    
+
 //   })
 // }
 
-function exibirElemento(elemento, indice, array) {
-  console.log({
-  elemento,
-  indice,
-  array
-  })
-  }
+const listaVagas = [];
 
-const listaVagas = [{nome: 'junior', quantidade: 4}, "Banana", "Laranja", "Limão", "Uva"]
-// Forma tradicional
-// for (let i = 0; i < lista.length; i++) {
-// exibirElemento(lista[i], i, lista)
-// }
-// Forma funcional
-// lista.forEach(exibirElemento)
-// Também poderia ser feito:
-let vagas = ''
-if (listaVagas.length > 0) {
-  lista.forEach(function (elemento, indice) {
-    let vaga = `
-    Vaga ${indice}
-    Nome da vaga: ${elemento.nome}
-    Quantidade de Candidatos ${elemento.quantidade}`
-    
-    vagas = vagas + "\n" + vaga 
-    
-  })
-  
-  alert("Lista de Vagas:" + vagas)
-} else {
-  alert("Sem vagas")
+function criarVagas() {
+  alert("Preparando para criar vaga...");
+  const vaga = {};
+  vaga.nome = prompt("Qual nome da vaga a ser anunciada?");
+  vaga.descricao = prompt("Digite uma descrição para a vaga.");
+  vaga.dataLimite = prompt("Qual a data limite para enviarem a candidatura?");
+  vaga.quantidadeCandidatos = 0;
+  vaga.nomesCandidatos = [];
+
+  let confirmarVaga = confirm(`
+  Os dados da vaga estão corretos? 
+  Nome da vaga: ${vaga.nome}\n
+  Descrição:
+  ${vaga.descricao}\n
+  Data limite: ${vaga.dataLimite}`);
+
+  if (confirmarVaga) {
+    listaVagas.push(vaga);
+    alert("Vaga criada com sucesso!");
+  } else {
+    alert("Reiniciando criação de vaga");
+    criarVagas();
+  }
+}
+function listarVagas() {
+  let vagas = "";
+  if (listaVagas.length > 0) {
+    listaVagas.forEach(function (vaga, indice) {
+      vagas += `\n
+      Indice da Vaga ${indice + 1}
+      Nome da vaga: ${vaga.nome}
+      Quantidade de Candidatos ${vaga.quantidadeCandidatos}`;
+    });
+
+    alert("Lista de vagas disponíveis:" + vagas);
+  } else {
+    alert("Sem vagas dispovíveis!");
+  }
 }
 
-// PROXIMO PASSO -> AJUSTAR PARA O FORMATO DA QUESTAO E FAZER CADASTRO PRA TER NOCAO DE COMO FICA A VARIAVEL CRIADA
+function inscreverCandidato() {
+  alert("Preparando candidatura...");
+
+  listarVagas();
+
+  let indiceVagaEscolhida = prompt(
+    "Qual o índice da vaga que irá se candidatar?"
+  );
+  if (indiceVagaEscolhida > listaVagas.length || indiceVagaEscolhida < 1) {
+    alert("Índice inválido");
+  } else {
+    listaVagas.forEach(function (vaga, indice) {
+      if (indice + 1 == indiceVagaEscolhida) {
+        let nomeCandidato = prompt("Digite seu nome.");
+
+        let confirmacaoVaga = confirm(`
+          Confirma a vaga escolhida? OK = SIM, Cancelar = NÃO \n
+          Indice da Vaga ${indice + 1}
+          Nome da vaga: ${vaga.nome}
+          Descrição:
+          ${vaga.descricao}
+          Data limite: ${vaga.dataLimite}`);
+
+        if (confirmacaoVaga) {
+          vaga.nomesCandidatos.push(nomeCandidato);
+          vaga.quantidadeCandidatos++;
+          alert("Candidato inscrito com sucesso!");
+        } else {
+          alert("Candidatura falhou, por favor recomeçar!");
+        }
+      }
+    });
+  }
+}
