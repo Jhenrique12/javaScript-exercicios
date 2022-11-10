@@ -1,11 +1,13 @@
+// Metodo 1 utilizando forEach pra listar elementos
+
 const listaVagas = [];
 
-function criarVagas() {
+function criarVagas() { 
   alert("Preparando para criar vaga...");
   const vaga = {};
   vaga.nome = prompt("Qual nome da vaga a ser anunciada?");
   vaga.descricao = prompt("Digite uma descrição para a vaga.");
-  vaga.dataLimite = prompt("Qual a data limite para enviarem a candidatura?");
+  vaga.dataLimite = prompt("Qual a data limite para enviarem a candidatura (dd/mm/aaaa)? ");
   vaga.quantidadeCandidatos = 0;
   vaga.nomesCandidatos = [];
 
@@ -132,48 +134,52 @@ function excluirVaga() {
     });
   }
 }
-
-let option = 0;
-do {
-  option = parseFloat(
-    prompt(`
-  Sistema de cadastro de vagas!
+function exibirMenu() {
+  let option = 0;
+  do {
+    option = parseFloat(
+      prompt(`
+    Sistema de cadastro de vagas!
+    
+    == MENU ==
+    
+    Escolha sua opção
+    1 - Criar vaga
+    2 - Listar vagas
+    3 - Inscrever candidato
+    4 - Visualizar vaga
+    5 - Excluir vaga
+    6 - SAIR`)
+    );
   
-  == MENU ==
-  
-  Escolha sua opção
-  1 - Criar vaga
-  2 - Listar vagas
-  3 - Inscrever candidato
-  4 - Visualizar vaga
-  5 - Excluir vaga
-  6 - SAIR`)
-  );
+    switch (option) {
+      case 1:
+        criarVagas();
+        break;
+      case 2:
+        listarVagas();
+        break;
+      case 3:
+        listaVagas.length > 0
+          ? inscreverCandidato()
+          : alert("Sem vagas disponíveis! Por favor criar uma vaga.");
+        break;
+      case 4:
+        listaVagas.length > 0
+          ? visualizarVaga()
+          : alert("Sem vagas disponíveis! Por favor criar uma vaga.");
+        break;
+      case 5:
+        listaVagas.length > 0
+          ? excluirVaga()
+          : alert("Sem vagas disponíveis! Por favor criar uma vaga.");
+        break;
+      case 6:
+        alert("Saindo...");
+        break;
+    }
+  } while (option !== 6);
+}
 
-  switch (option) {
-    case 1:
-      criarVagas();
-      break;
-    case 2:
-      listarVagas();
-      break;
-    case 3:
-      listaVagas.length > 0
-        ? inscreverCandidato()
-        : alert("Sem vagas disponíveis! Por favor criar uma vaga.");
-      break;
-    case 4:
-      listaVagas.length > 0
-        ? visualizarVaga()
-        : alert("Sem vagas disponíveis! Por favor criar uma vaga.");
-      break;
-    case 5:
-      listaVagas.length > 0
-        ? excluirVaga()
-        : alert("Sem vagas disponíveis! Por favor criar uma vaga.");
-      break;
-    case 6:
-      alert("Saindo...");
-      break;
-  }
-} while (option !== 6);
+exibirMenu()
+
