@@ -21,10 +21,11 @@ function criarVagas() {
   if (confirmarVaga) {
     listaVagas.push(vaga);
     alert("Vaga criada com sucesso!");
-  } else {
+    return
+  } 
     alert("Reiniciando criação de vaga");
     criarVagas();
-  }
+  
 }
 function listarVagas() {
   let vagas = "";
@@ -37,9 +38,10 @@ function listarVagas() {
     });
 
     alert("Lista de vagas disponíveis:" + vagas);
-  } else {
+    return
+  } 
     alert("Sem vagas dispovíveis!");
-  }
+  
 }
 function inscreverCandidato() {
   alert("Preparando candidatura...");
@@ -51,7 +53,8 @@ function inscreverCandidato() {
   );
   if (indiceVagaEscolhida > listaVagas.length || indiceVagaEscolhida < 1) {
     alert("Índice inválido");
-  } else {
+    return
+  } 
     listaVagas.forEach(function (vaga, indice) {
       if (indice + 1 == indiceVagaEscolhida) {
         let nomeCandidato = prompt("Digite seu nome.");
@@ -68,12 +71,13 @@ function inscreverCandidato() {
           vaga.nomesCandidatos.push(nomeCandidato);
           vaga.quantidadeCandidatos++;
           alert("Candidato inscrito com sucesso!");
-        } else {
+          return
+        } 
           alert("Candidatura falhou, por favor recomeçar!");
-        }
+        
       }
     });
-  }
+  
 }
 function visualizarVaga() {
   alert("Preparando visualização...");
@@ -86,7 +90,8 @@ function visualizarVaga() {
 
   if (indiceVagaEscolhida > listaVagas.length || indiceVagaEscolhida < 1) {
     alert("Índice inválido");
-  } else {
+    return
+  } 
     listaVagas.forEach(function (vaga, indice) {
       if (indice + 1 == indiceVagaEscolhida) {
         alert(`
@@ -100,7 +105,7 @@ function visualizarVaga() {
         `);
       }
     });
-  }
+  
 }
 function excluirVaga() {
   alert("Iniciando exclusão de vaga...");
@@ -111,7 +116,8 @@ function excluirVaga() {
 
   if (indiceVagaEscolhida > listaVagas.length || indiceVagaEscolhida < 1) {
     alert("Índice inválido");
-  } else {
+    return
+  } 
     listaVagas.forEach(function (vaga, indice) {
       if (indice + 1 == indiceVagaEscolhida) {
         let confirmacaoVaga = confirm(`
@@ -127,12 +133,13 @@ function excluirVaga() {
         if (confirmacaoVaga) {
           listaVagas.splice(indiceVagaEscolhida - 1, 1);
           alert("Exclusão feita com sucesso!");
-        } else {
+          return
+        } 
           alert("Processo de exclusão cancelado...");
-        }
+        
       }
     });
-  }
+  
 }
 function exibirMenu() {
   let option = 0;
