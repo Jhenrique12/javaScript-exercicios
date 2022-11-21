@@ -2,48 +2,16 @@ const form = document.getElementById("formId");
 const submitButton = document.getElementById("submitButton");
 
 const addStackButton = document.getElementById("addStackButton");
-const stacksDiv = document.getElementById("stacksDiv");
 
 const devList = [];
 let numberStacks = 0;
 
-form.addEventListener("submit", function (ev) {
-  ev.preventDefault();
-  const devInfo = {};
-  const devName = document.getElementById("devName");
-
-  for (let i = 0; i < numberStacks; i++) {
-    const currentStack = document.getElementById("stack" + i);
-
-    devInfo["devName" + i] = devName.value;
-    devInfo["stack" + i] = currentStack.value;
-  }
-
-  devList.push(devInfo);
-
-  console.log(devInfo);
-  console.log(devList);
-
-  console.log(numberStacks);
-  devName.value = "";
-});
-
-// const botao  = document.getElementById("a")
-// botao.addEventListener ("click", function(ev) {
-//   ev.preventDefault
-//   const devName = document.getElementById("devName")
-
-//talvez tenha que usar um for junto do numberStacks pra percorrer e add os itens ao obj
-//   const stack
-
-//   devInfor.name = devName.value
-//   console.log(devInfor)
-
-// })
-
 function addStack() {
+  const stacksDiv = document.getElementById("stacksDiv");
+
   const section = document.createElement("section");
   section.id = "section" + numberStacks;
+  section.className = "section"
 
   const labelStack = document.createElement("label");
   labelStack.innerText = "\nStack: ";
@@ -51,42 +19,41 @@ function addStack() {
   const stack = document.createElement("input");
   stack.type = "text";
   stack.id = "stack" + numberStacks;
-  stack.name = stack.id;
+  stack.name = "stack";
 
   const radio1 = document.createElement("input");
   radio1.type = "radio";
-  radio1.id = "radio1" + numberStacks;
+  radio1.id = "radio" + numberStacks + ".1";
   radio1.name = "experience" + numberStacks;
+  radio1.value = "0-2 anos"
   const labelRadio1 = document.createElement("label");
-  labelRadio1.htmlFor = "radio1" + numberStacks;
+  labelRadio1.htmlFor = "radio" + numberStacks + ".1";
   labelRadio1.innerText = "0-2 anos";
 
   const radio2 = document.createElement("input");
   radio2.type = "radio";
-  radio2.id = "radio2" + numberStacks;
+  radio2.id = "radio" + numberStacks + ".2";
   radio2.name = "experience" + numberStacks;
+  radio2.value = "3-4 anos"
   const labelRadio2 = document.createElement("label");
-  labelRadio2.htmlFor = "radio2" + numberStacks;
+  labelRadio2.htmlFor = "radio" + numberStacks + ".2";
   labelRadio2.innerText = "3-4 anos";
 
   const radio3 = document.createElement("input");
   radio3.type = "radio";
-  radio3.id = "radio3" + numberStacks;
+  radio3.id = "radio" + numberStacks + ".3";
   radio3.name = "experience" + numberStacks;
+  radio3.value = "5+ anos"
   const labelRadio3 = document.createElement("label");
-  labelRadio3.htmlFor = "radio3" + numberStacks;
+  labelRadio3.htmlFor = "radio" + numberStacks + ".3";
   labelRadio3.innerText = "5+ anos\n\n";
 
   const buttonRemoveStack = document.createElement("button");
-  buttonRemoveStack.id = "removeButton" + numberStacks;
-  buttonRemoveStack.innerText = "Remover stack";
+  buttonRemoveStack.type = "button"
+  buttonRemoveStack.innerText = "Remover";
 
-  buttonRemoveStack.addEventListener("click", function (ev) {
-    ev.preventDefault();
-
-    const section = ev.currentTarget.parentNode;
+  buttonRemoveStack.addEventListener("click", function () {
     stacksDiv.removeChild(section);
-    numberStacks -= 1;
   });
 
   section.append(
@@ -104,14 +71,41 @@ function addStack() {
   stacksDiv.appendChild(section);
 }
 
-addStackButton.addEventListener("click", function (ev) {
-  ev.preventDefault;
-
+addStackButton.addEventListener("click", function () {
   addStack();
   numberStacks++;
 });
 
-//forEach 2x em cada
-// devInfo = {name, stack.value, experience.value}
 
-// devList.push(devInfo)
+
+form.addEventListener("submit", function (ev) {
+  ev.preventDefault();
+
+  const devName = document.getElementById("devName").value;
+
+  const sections = this.querySelectorAll(".section")
+  
+  let technologies = []
+
+  sections.forEach(function (section) {
+    const stackName = document.querySelector('#' + section.id + ' input[name="stack"]').value
+    const stackExperience = document.querySelector('#' + section.id + ' input[type="radio"]:checked').value
+
+    
+
+    technologies.push({name: stackName, exp: stackExperience})
+  })
+
+  const devInfo = {devName: devName, technologies}
+
+  devList.push(devInfo)
+
+  alert("Desenvolvedor cadastrado!")
+
+  devName.value = ''
+
+  sections.forEach(function (section) {
+    section.remove()
+  })
+  console.log(devList)
+});
